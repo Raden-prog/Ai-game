@@ -3,35 +3,51 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Simple Clicker Game</title>
+    <title>Gold Clicker Deluxe</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <div class="container">
-        <h1>Gold Clicker</h1>
+        <h1>Gold Clicker Deluxe</h1>
 
         <div class="gold-display">
             <p>Gold: <span id="goldCount">0</span></p>
-            <p>Gold per Click: <span id="goldPerClickDisplay">1</span></p>
-            <p>Gold per Second: <span id="goldPerSecondDisplay">0</span></p>
+            <p>Gold per Click (GPC): <span id="goldPerClickDisplay">1</span></p>
+            <p>Gold per Second (GPS): <span id="goldPerSecondDisplay">0</span></p>
         </div>
 
         <button id="clickButton" class="click-button">Click for Gold!</button>
 
+        <div class="boost-section">
+            <h2>Boosts</h2>
+            <button id="adBoostButton">Watch Ad for 2x Gold (30s)!</button>
+            <p id="boostStatus">Boost Inactive</p>
+        </div>
+
         <div class="upgrades-section">
             <h2>Upgrades</h2>
             <div id="upgradesContainer">
-                <div class="upgrade-item" id="upgradeMoreClicks">
+                <div class="upgrade-item" id="upgradeStrongerClicks">
                     <h3>Stronger Clicks</h3>
-                    <p>Increases Gold per Click by 1.</p>
+                    <p>Increases Gold per Click (GPC).</p>
+                    <p>Current Level: <span id="strongerClicksLevelDisplay">0</span></p>
                     <p>Current Bonus: +<span id="strongerClicksBonusDisplay">0</span> GPC</p>
                     <p>Cost: <span id="strongerClicksCostDisplay">10</span> Gold</p>
                     <button id="buyStrongerClicksButton">Buy</button>
                 </div>
-            </div>
+
+                <div class="upgrade-item" id="upgradeAutoMiner">
+                    <h3>Auto Miner</h3>
+                    <p>Automatically generates Gold per Second (GPS).</p>
+                    <p>Current Level: <span id="autoMinerLevelDisplay">0</span></p>
+                    <p>Current Output: <span id="autoMinerOutputDisplay">0</span> GPS</p>
+                    <p>Cost: <span id="autoMinerCostDisplay">25</span> Gold</p>
+                    <button id="buyAutoMinerButton">Buy</button>
+                </div>
+                </div>
         </div>
+         <button id="resetButton" class="reset-button">Reset Game Data</button>
     </div>
 
-    <script src="script.js"></script>
-</body>
+    <script src="script.js"></script></body>
 </html>
