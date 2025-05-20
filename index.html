@@ -1,26 +1,28 @@
 <!DOCTYPE html>
-<html lang="en-US">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Interactive Text RPG</title>
+    <title>Simple Clicker Game</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div id="game-container">
-        <div id="stats-area">
-            <h3>Player Status</h3>
-            <p>Name: <span id="player-name">Hero</span></p>
-            <p>HP: <span id="player-hp">100</span></p>
-            <p>Attack: <span id="player-attack">10</span></p>
-            <p>Scene: <span id="player-location">Starting Village</span></p>
+    <div class="container">
+        <h1>Gold Clicker</h1>
+
+        <div class="gold-display">
+            <p>Gold: <span id="goldCount">0</span></p>
+            <p>Gold per Click: <span id="goldPerClickDisplay">1</span></p>
+            <p>Gold per Second: <span id="goldPerSecondDisplay">0</span></p>
         </div>
 
-        <div id="output-area">
-            </div>
+        <button id="clickButton" class="click-button">Click for Gold!</button>
 
-        <div id="choices-area">
-            </div>
+        <div class="upgrades-section">
+            <h2>Upgrades</h2>
+            <div id="upgradesContainer">
+                </div>
+        </div>
     </div>
 
     <script src="script.js"></script>
