@@ -12,17 +12,28 @@ const strongerClicksBonusPerLevel = 1;
 let autoMinerLevel = 0;
 const autoMinerBaseCost = 25;
 const autoMinerCostIncreaseFactor = 1.20;
-const autoMinerGPSPerLevel = 1;
+const autoMinerGPSPerLevel = 1; // This is now base GPS per miner level
+
+// Click Amplifier Upgrade
+let clickAmplifierLevel = 0;
+const clickAmplifierBaseCost = 100;
+const clickAmplifierCostIncreaseFactor = 1.25;
+const clickAmplifierBonusPerLevel = 0.1;
+
+// Auto Miner Efficiency Upgrade
+let autoMinerEfficiencyLevel = 0;
+const autoMinerEfficiencyBaseCost = 150;
+const autoMinerEfficiencyCostIncreaseFactor = 1.30;
+const autoMinerEfficiencyBonusPerLevel = 0.1; // Each level adds 0.1 (10%) to GPS multiplier
 
 // Ad Boost
 let isBoostActive = false;
 let boostEndTime = 0;
-const boostDuration = 30 * 1000; // 30 seconds
+const boostDuration = 30 * 1000;
 const boostMultiplier = 2;
 
 
 // --- DOM Element References ---
-// It's good practice to ensure these are not null after assignment
 const goldCountDisplay = document.getElementById('goldCount');
 const goldPerClickDisplay = document.getElementById('goldPerClickDisplay');
 const goldPerSecondDisplay = document.getElementById('goldPerSecondDisplay');
@@ -34,18 +45,29 @@ const strongerClicksCostDisplay = document.getElementById('strongerClicksCostDis
 const buyStrongerClicksButton = document.getElementById('buyStrongerClicksButton');
 
 const autoMinerLevelDisplay = document.getElementById('autoMinerLevelDisplay');
-const autoMinerOutputDisplay = document.getElementById('autoMinerOutputDisplay');
+const autoMinerOutputDisplay = document.getElementById('autoMinerOutputDisplay'); // Shows base output
 const autoMinerCostDisplay = document.getElementById('autoMinerCostDisplay');
 const buyAutoMinerButton = document.getElementById('buyAutoMinerButton');
 
+const clickAmplifierLevelDisplay = document.getElementById('clickAmplifierLevelDisplay');
+const clickAmplifierBonusDisplay = document.getElementById('clickAmplifierBonusDisplay');
+const clickAmplifierCostDisplay = document.getElementById('clickAmplifierCostDisplay');
+const buyClickAmplifierButton = document.getElementById('buyClickAmplifierButton');
+
+const autoMinerEfficiencyLevelDisplay = document.getElementById('autoMinerEfficiencyLevelDisplay');
+const autoMinerEfficiencyBonusDisplay = document.getElementById('autoMinerEfficiencyBonusDisplay');
+const autoMinerEfficiencyCostDisplay = document.getElementById('autoMinerEfficiencyCostDisplay');
+const buyAutoMinerEfficiencyButton = document.getElementById('buyAutoMinerEfficiencyButton');
+
 const adBoostButton = document.getElementById('adBoostButton');
 const boostStatusDisplay = document.getElementById('boostStatus');
-
 const resetButton = document.getElementById('resetButton');
 
 // --- Calculated Game Values ---
 function getCurrentGoldPerClick() {
-    let gpc = 1 + (strongerClicksLevel * strongerClicksBonusPerLevel);
+    let baseGPC = 1 + (strongerClicksLevel * strongerClicksBonusPerLevel);
+    let gpcMultiplier = 1 + (clickAmplifierLevel * clickAmplifierBonusPerLevel);
+    let gpc = baseGPC * gpcMultiplier;
     if (isBoostActive) {
         gpc *= boostMultiplier;
     }
@@ -53,7 +75,9 @@ function getCurrentGoldPerClick() {
 }
 
 function getCurrentGoldPerSecond() {
-    let gps = autoMinerLevel * autoMinerGPSPerLevel;
+    let baseGPS = autoMinerLevel * autoMinerGPSPerLevel; // GPS from number of miners
+    let gpsMultiplier = 1 + (autoMinerEfficiencyLevel * autoMinerEfficiencyBonusPerLevel); // Multiplier from efficiency
+    let gps = baseGPS * gpsMultiplier;
     if (isBoostActive) {
         gps *= boostMultiplier;
     }
@@ -68,21 +92,29 @@ function getAutoMinerCost() {
     return Math.ceil(autoMinerBaseCost * Math.pow(autoMinerCostIncreaseFactor, autoMinerLevel));
 }
 
+function getClickAmplifierCost() {
+    return Math.ceil(clickAmplifierBaseCost * Math.pow(clickAmplifierCostIncreaseFactor, clickAmplifierLevel));
+}
+
+function getAutoMinerEfficiencyCost() {
+    return Math.ceil(autoMinerEfficiencyBaseCost * Math.pow(autoMinerEfficiencyCostIncreaseFactor, autoMinerEfficiencyLevel));
+}
+
 // --- Game Functions ---
 function updateDisplay() {
-    // console.log("updateDisplay called. Gold:", gold, "isBoostActive:", isBoostActive); // General check
-
     if (!goldCountDisplay || !goldPerClickDisplay || !goldPerSecondDisplay ||
         !strongerClicksLevelDisplay || !strongerClicksBonusDisplay || !strongerClicksCostDisplay || !buyStrongerClicksButton ||
         !autoMinerLevelDisplay || !autoMinerOutputDisplay || !autoMinerCostDisplay || !buyAutoMinerButton ||
-        !adBoostButton || !boostStatusDisplay) {
+        !clickAmplifierLevelDisplay || !clickAmplifierBonusDisplay || !clickAmplifierCostDisplay || !buyClickAmplifierButton ||
+        !autoMinerEfficiencyLevelDisplay || !autoMinerEfficiencyBonusDisplay || !autoMinerEfficiencyCostDisplay || !buyAutoMinerEfficiencyButton ||
+        !adBoostButton || !boostStatusDisplay || !resetButton) {
         console.error("One or more DOM elements are missing! Check IDs in HTML and JS.");
-        return; // Stop if critical elements are missing
+        return;
     }
 
     goldCountDisplay.textContent = Math.floor(gold);
-    goldPerClickDisplay.textContent = getCurrentGoldPerClick();
-    goldPerSecondDisplay.textContent = getCurrentGoldPerSecond();
+    goldPerClickDisplay.textContent = getCurrentGoldPerClick().toFixed(1);
+    goldPerSecondDisplay.textContent = getCurrentGoldPerSecond().toFixed(1);
 
     // Stronger Clicks Upgrade
     strongerClicksLevelDisplay.textContent = strongerClicksLevel;
@@ -93,12 +125,26 @@ function updateDisplay() {
 
     // Auto Miner Upgrade
     autoMinerLevelDisplay.textContent = autoMinerLevel;
-    autoMinerOutputDisplay.textContent = (autoMinerLevel * autoMinerGPSPerLevel);
+    autoMinerOutputDisplay.textContent = (autoMinerLevel * autoMinerGPSPerLevel); // Show base GPS from miners
     const currentAutoMinerCost = getAutoMinerCost();
     autoMinerCostDisplay.textContent = currentAutoMinerCost;
     buyAutoMinerButton.disabled = gold < currentAutoMinerCost;
-    // console.log(`AutoMiner - Gold: ${gold}, Cost: ${currentAutoMinerCost}, Button Disabled: ${buyAutoMinerButton.disabled}`);
 
+    // Click Amplifier Upgrade Display
+    clickAmplifierLevelDisplay.textContent = clickAmplifierLevel;
+    let currentClickMultiplier = 1 + (clickAmplifierLevel * clickAmplifierBonusPerLevel);
+    clickAmplifierBonusDisplay.textContent = currentClickMultiplier.toFixed(1);
+    const currentClickAmplifierCost = getClickAmplifierCost();
+    clickAmplifierCostDisplay.textContent = currentClickAmplifierCost;
+    buyClickAmplifierButton.disabled = gold < currentClickAmplifierCost;
+
+    // Auto Miner Efficiency Upgrade Display
+    autoMinerEfficiencyLevelDisplay.textContent = autoMinerEfficiencyLevel;
+    let currentGPSMultiplier = 1 + (autoMinerEfficiencyLevel * autoMinerEfficiencyBonusPerLevel);
+    autoMinerEfficiencyBonusDisplay.textContent = currentGPSMultiplier.toFixed(1);
+    const currentAutoMinerEfficiencyCost = getAutoMinerEfficiencyCost();
+    autoMinerEfficiencyCostDisplay.textContent = currentAutoMinerEfficiencyCost;
+    buyAutoMinerEfficiencyButton.disabled = gold < currentAutoMinerEfficiencyCost;
 
     // Ad Boost
     if (isBoostActive) {
@@ -109,7 +155,6 @@ function updateDisplay() {
         boostStatusDisplay.textContent = 'Boost Inactive';
         adBoostButton.disabled = false;
     }
-    // console.log("updateDisplay finished.");
 }
 
 function clickGold() {
@@ -119,50 +164,57 @@ function clickGold() {
 
 function buyStrongerClicks() {
     const cost = getStrongerClicksCost();
-    // console.log(`buyStrongerClicks attempt. Gold: ${gold}, Cost: ${cost}`);
     if (gold >= cost) {
         gold -= cost;
         strongerClicksLevel++;
-        // console.log(`Stronger Clicks bought. New Level: ${strongerClicksLevel}, Gold Left: ${gold}`);
         updateDisplay();
     }
 }
 
 function buyAutoMiner() {
     const cost = getAutoMinerCost();
-    console.log(`buyAutoMiner attempt. Gold: ${gold}, Cost: ${cost}, autoMinerLevel before: ${autoMinerLevel}`);
     if (gold >= cost) {
         gold -= cost;
         autoMinerLevel++;
-        console.log(`Auto Miner bought. New Level: ${autoMinerLevel}, Gold Left: ${gold}`);
         updateDisplay();
-    } else {
-         console.log(`Not enough gold for Auto Miner. Gold: ${gold}, Cost: ${cost}`);
+    }
+}
+
+function buyClickAmplifier() {
+    const cost = getClickAmplifierCost();
+    if (gold >= cost) {
+        gold -= cost;
+        clickAmplifierLevel++;
+        updateDisplay();
+    }
+}
+
+function buyAutoMinerEfficiency() {
+    const cost = getAutoMinerEfficiencyCost();
+    if (gold >= cost) {
+        gold -= cost;
+        autoMinerEfficiencyLevel++;
+        updateDisplay();
     }
 }
 
 function activateAdBoost() {
-    console.log("activateAdBoost called. Current isBoostActive:", isBoostActive);
     if (!isBoostActive) {
         isBoostActive = true;
         boostEndTime = Date.now() + boostDuration;
-        console.log("Ad boost activated. New isBoostActive:", isBoostActive, "End time:", new Date(boostEndTime).toLocaleString());
-        updateDisplay(); // Update display immediately
-    } else {
-        console.log("activateAdBoost called, but boost already active or button should be disabled.");
+        updateDisplay();
     }
 }
 
 function gameLoop() {
-    let goldEarnedThisTick = getCurrentGoldPerSecond() / 10; // GPS is per second, loop is 100ms (10 times per sec)
+    let goldEarnedThisTick = getCurrentGoldPerSecond() / 10;
     if (goldEarnedThisTick > 0) {
          gold += goldEarnedThisTick;
     }
 
     if (isBoostActive && Date.now() > boostEndTime) {
-        console.log("Boost expired in gameLoop. End time was:", new Date(boostEndTime).toLocaleString(), "Current time:", new Date(Date.now()).toLocaleString());
         isBoostActive = false;
-        updateDisplay(); // FIX: Ensure display updates immediately when boost expires
+        updateDisplay();
     }
 
     updateDisplay();
@@ -176,10 +228,10 @@ function saveGame() {
             gold: gold,
             strongerClicksLevel: strongerClicksLevel,
             autoMinerLevel: autoMinerLevel,
-            // Boost state (isBoostActive, boostEndTime) is intentionally not saved as it's temporary.
+            clickAmplifierLevel: clickAmplifierLevel,
+            autoMinerEfficiencyLevel: autoMinerEfficiencyLevel,
         };
         localStorage.setItem(SAVE_KEY, JSON.stringify(gameState));
-        // console.log("Game Saved!", gameState);
     } catch (e) {
         console.error("Error saving game:", e);
     }
@@ -190,36 +242,41 @@ function loadGame() {
         const savedGame = localStorage.getItem(SAVE_KEY);
         if (savedGame) {
             const gameState = JSON.parse(savedGame);
-            gold = parseFloat(gameState.gold) || 0; // Ensure gold is a number
+            gold = parseFloat(gameState.gold) || 0;
             strongerClicksLevel = parseInt(gameState.strongerClicksLevel) || 0;
             autoMinerLevel = parseInt(gameState.autoMinerLevel) || 0;
-            console.log("Game Loaded:", gameState);
+            clickAmplifierLevel = parseInt(gameState.clickAmplifierLevel) || 0;
+            autoMinerEfficiencyLevel = parseInt(gameState.autoMinerEfficiencyLevel) || 0;
         } else {
-            console.log("No saved game found, starting new game.");
+            // Initialize if no save data for new fields, ensure others default to 0 if not present
+            gold = gold || 0;
+            strongerClicksLevel = strongerClicksLevel || 0;
+            autoMinerLevel = autoMinerLevel || 0;
+            clickAmplifierLevel = clickAmplifierLevel || 0;
+            autoMinerEfficiencyLevel = autoMinerEfficiencyLevel || 0;
         }
     } catch (e) {
         console.error("Error loading game:", e);
-        // Fallback to default values if loading fails
         gold = 0;
         strongerClicksLevel = 0;
         autoMinerLevel = 0;
+        clickAmplifierLevel = 0;
+        autoMinerEfficiencyLevel = 0;
     }
 }
 
 function resetGameData() {
     if (confirm("Are you sure you want to reset all your game data? This cannot be undone!")) {
-        console.log("Resetting game data...");
         try {
             localStorage.removeItem(SAVE_KEY);
             gold = 0;
             strongerClicksLevel = 0;
             autoMinerLevel = 0;
+            clickAmplifierLevel = 0;
+            autoMinerEfficiencyLevel = 0;
             isBoostActive = false;
             boostEndTime = 0;
-            console.log(`Data reset internally. Gold: ${gold}, SC Lvl: ${strongerClicksLevel}, AM Lvl: ${autoMinerLevel}, Boost: ${isBoostActive}`);
             updateDisplay();
-            // The gameLoop will call saveGame() shortly, saving the reset state.
-            console.log("Game data reset and display updated. The next save will persist this reset state.");
         } catch (e) {
             console.error("Error resetting game data:", e);
         }
@@ -228,18 +285,19 @@ function resetGameData() {
 
 
 // --- Event Listeners ---
-// Ensure buttons exist before adding listeners
 if (clickButton) clickButton.addEventListener('click', clickGold);
 if (buyStrongerClicksButton) buyStrongerClicksButton.addEventListener('click', buyStrongerClicks);
 if (buyAutoMinerButton) buyAutoMinerButton.addEventListener('click', buyAutoMiner);
+if (buyClickAmplifierButton) buyClickAmplifierButton.addEventListener('click', buyClickAmplifier);
+if (buyAutoMinerEfficiencyButton) buyAutoMinerEfficiencyButton.addEventListener('click', buyAutoMinerEfficiency);
 if (adBoostButton) adBoostButton.addEventListener('click', activateAdBoost);
 if (resetButton) resetButton.addEventListener('click', resetGameData);
 
 
 // --- Initial Game Setup ---
-console.log("Initializing game...");
+console.log("Initializing game with Auto Miner Efficiency..."); // You can see this in browser console
 loadGame();
 updateDisplay();
-setInterval(gameLoop, 100); // Run game loop every 100 milliseconds
+setInterval(gameLoop, 100);
 
-console.log("Gold Clicker Deluxe Initialized with debugging.");
+console.log("Gold Clicker Deluxe Initialized with Auto Miner Efficiency."); // You can see this in browser console
