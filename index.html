@@ -38,16 +38,35 @@
 
                 <div class="upgrade-item" id="upgradeAutoMiner">
                     <h3>Auto Miner</h3>
-                    <p>Automatically generates Gold per Second (GPS).</p>
+                    <p>Base Gold per Second (GPS).</p>
                     <p>Current Level: <span id="autoMinerLevelDisplay">0</span></p>
-                    <p>Current Output: <span id="autoMinerOutputDisplay">0</span> GPS</p>
+                    <p>Base Output: <span id="autoMinerOutputDisplay">0</span> GPS</p>
                     <p>Cost: <span id="autoMinerCostDisplay">25</span> Gold</p>
                     <button id="buyAutoMinerButton">Buy</button>
+                </div>
+
+                <div class="upgrade-item" id="upgradeClickAmplifier">
+                    <h3>Click Amplifier</h3>
+                    <p>Multiplies your total Gold per Click (GPC).</p>
+                    <p>Current Level: <span id="clickAmplifierLevelDisplay">0</span></p>
+                    <p>Current Multiplier: x<span id="clickAmplifierBonusDisplay">1.0</span></p>
+                    <p>Cost: <span id="clickAmplifierCostDisplay">100</span> Gold</p>
+                    <button id="buyClickAmplifierButton">Buy</button>
+                </div>
+
+                <div class="upgrade-item" id="upgradeAutoMinerEfficiency">
+                    <h3>Miner Efficiency</h3>
+                    <p>Multiplies your total Gold per Second (GPS).</p>
+                    <p>Current Level: <span id="autoMinerEfficiencyLevelDisplay">0</span></p>
+                    <p>Current Multiplier: x<span id="autoMinerEfficiencyBonusDisplay">1.0</span></p>
+                    <p>Cost: <span id="autoMinerEfficiencyCostDisplay">150</span> Gold</p>
+                    <button id="buyAutoMinerEfficiencyButton">Buy</button>
                 </div>
                 </div>
         </div>
          <button id="resetButton" class="reset-button">Reset Game Data</button>
     </div>
 
-    <script src="script.js"></script></body>
+    <script src="script.js"></script>
+</body>
 </html>
