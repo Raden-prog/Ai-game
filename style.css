@@ -8,7 +8,7 @@ body {
     margin: 20px 0;
     background-color: #f0f0f0;
     color: #333;
-    -webkit-user-select: none;
+    -webkit-user-select: none; 
     -moz-user-select: none;
     -ms-user-select: none;
     user-select: none;
@@ -18,45 +18,45 @@ body {
     text-align: center;
     background-color: #fff;
     padding: 20px;
-    border-radius: 12px; /* Slightly more rounded */
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15); /* Enhanced shadow */
+    border-radius: 12px; 
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15); 
     max-width: 580px; 
     width: 90%;
 }
 
 h1 {
     color: #c0392b; 
-    margin-bottom: 25px; /* More space below title */
+    margin-bottom: 25px; 
 }
 
-.scp-display p {
-    margin: 10px 0; /* Increased margin */
-    font-size: 1.25em; /* Slightly larger */
+.scp-display p { 
+    margin: 10px 0; 
+    font-size: 1.25em; 
 }
 
-#scpCount {
+#scpCount { 
     font-weight: bold;
     color: #c0392b;
-    font-size: 1.5em; /* Larger SCP count */
+    font-size: 1.5em; 
 }
 
 /* Main Action Area */
 .main-action-area {
     margin: 20px auto;
-    position: relative; /* For click feedback positioning */
+    position: relative; 
     display: flex;
     flex-direction: column;
     align-items: center;
 }
 
-.main-action-button { /* Replaces old .click-button styles for the main one */
+.main-action-button { 
     background-color: #27ae60; 
     color: white;
     border: none;
-    border-radius: 15px; /* More rounded */
-    padding: 20px; /* Uniform padding */
-    width: 200px;   /* Fixed width */
-    height: 200px;  /* Fixed height to make it squarish/roundish */
+    border-radius: 15px; 
+    padding: 20px; 
+    width: 200px;   
+    height: 200px;  
     font-size: 1.2em; 
     cursor: pointer;
     box-shadow: 0 5px 15px rgba(39, 174, 96, 0.3);
@@ -70,7 +70,7 @@ h1 {
 }
 
 .main-action-button .action-button-icon {
-    font-size: 3em; /* Large icon */
+    font-size: 3em; 
     margin-bottom: 10px;
 }
 
@@ -86,17 +86,17 @@ h1 {
 }
 
 .main-action-button:active {
-    transform: scale(0.95); /* More pronounced active scale */
+    transform: scale(0.95); 
     box-shadow: 0 2px 10px rgba(39, 174, 96, 0.2);
 }
 
 .click-feedback-container {
-    position: absolute; /* Positioned relative to main-action-area */
-    bottom: 100%; /* Start above the button area */
+    position: absolute; 
+    bottom: 100%; 
     left: 50%;
     transform: translateX(-50%);
-    width: 200px; /* Match button width or make wider */
-    height: 60px; /* Enough space for text to float */
+    width: 200px; 
+    height: 60px; 
     pointer-events: none; 
 }
 
@@ -109,7 +109,7 @@ h1 {
     background-color: rgba(231, 76, 60, 0.85); 
     padding: 5px 10px; 
     border-radius: 12px;
-    font-size: 1.2em; /* Larger feedback text */
+    font-size: 1.2em; 
     font-weight: bold;
     color: #fff;
     white-space: nowrap;
@@ -117,7 +117,7 @@ h1 {
 }
 
 
-@keyframes floatUpAndFade { /* Animation remains the same */
+@keyframes floatUpAndFade { 
     0% {
         opacity: 1;
         transform: translate(-50%, 0px);
@@ -128,7 +128,6 @@ h1 {
     }
 }
 
-/* Themed buttons for consistency */
 .themed-button {
     color: white;
     border: none;
@@ -138,7 +137,7 @@ h1 {
     cursor: pointer;
     transition: background-color 0.3s ease, transform 0.1s ease;
     -webkit-tap-highlight-color: transparent;
-    margin: 5px; /* Add some margin if buttons are close */
+    margin: 5px; 
 }
 
 .themed-button:active {
@@ -157,15 +156,20 @@ h1 {
 .upgrade-buy-button:hover { background-color: #3498db; }
 .upgrade-buy-button:disabled { background-color: #aed6f1; cursor: not-allowed; }
 
-.reset-button { background-color: #c0392b; margin-top: 30px; }
+.reset-button { 
+    background-color: #c0392b; 
+    margin-top: 30px; 
+    padding: 10px 20px; /* Explicitly defined reset button padding */
+    font-size: 1em; /* Explicitly defined reset button font size */
+}
 .reset-button:hover { background-color: #a93226; }
 
 
-.boost-section, .prestige-section {
+.boost-section, .prestige-section, .music-player-section { /* Added music-player-section */
     margin-top: 25px;
     margin-bottom: 25px;
     padding: 15px;
-    border-radius: 8px; /* More rounded sections */
+    border-radius: 8px; 
 }
 .boost-section { background-color: #e8f6f3; border: 1px solid #a3e4d7; }
 .boost-section h2 { margin-top: 0; color: #196f3d;}
@@ -175,6 +179,38 @@ h1 {
 .prestige-section p { margin: 8px 0; font-size: 1em; }
 #influencePointsDisplay, #prestigeBonusDisplay { font-weight: bold; }
 
+.music-player-section {
+    background-color: #e9ecef; 
+    border: 1px solid #ced4da;
+}
+.music-player-section h2 {
+    margin-top: 0;
+    color: #495057; 
+    font-size: 1.3em;
+    margin-bottom: 15px;
+}
+.music-controls {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 15px; 
+    margin-bottom: 10px;
+}
+.music-control-button { 
+    background-color: #6c757d; 
+    min-width: 80px; 
+}
+.music-control-button:hover {
+    background-color: #5a6268;
+}
+#trackInfo {
+    font-style: italic;
+    color: #343a40; 
+    margin-top: 10px;
+    font-size: 0.95em;
+    min-height: 1.2em; 
+}
+
 
 .upgrades-section {
     margin-top: 30px;
@@ -182,7 +218,7 @@ h1 {
     padding-top: 20px;
 }
 #upgradesContainer {
-    max-height: 260px; /* Adjusted based on content */
+    max-height: 260px; 
     overflow-y: auto;
     padding-right: 5px;
     margin-right: -5px; 
@@ -200,4 +236,3 @@ h1 {
 }
 .upgrade-item h3 { margin-top: 0; margin-bottom: 5px; color: #2c3e50; font-size: 1.1em;}
 .upgrade-item p { margin: 0; font-size: 0.9em; line-height: 1.4; }
-/* Upgrade buy button style is now part of .themed-button .upgrade-buy-button */
