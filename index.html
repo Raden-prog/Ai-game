@@ -3,68 +3,69 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gold Clicker Deluxe</title>
+    <title>Social Credit Simulator</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <div class="container">
-        <h1>Gold Clicker Deluxe</h1>
+        <h1>Social Credit Simulator</h1>
 
-        <div class="gold-display">
-            <p>Gold: <span id="goldCount">0</span></p>
-            <p>Gold per Click (GPC): <span id="goldPerClickDisplay">1</span></p>
-            <p>Gold per Second (GPS): <span id="goldPerSecondDisplay">0</span></p>
+        <div class="scp-display"> <p>Social Credit Points (SCP): <span id="scpCount">0</span></p>
+            <p>SCP per Action: <span id="scpPerClickDisplay">1</span></p>
+            <p>SCP per Second (Passive): <span id="scpPerSecondDisplay">0</span></p>
         </div>
 
-        <button id="clickButton" class="click-button">Click for Gold!</button>
-
-        <div class="boost-section">
-            <h2>Boosts</h2>
-            <button id="adBoostButton">Watch Ad for 2x Gold (30s)!</button>
+        <div id="clickFeedbackContainer" class="click-feedback-container"></div>
+        <button id="actionButton" class="click-button">Perform Good Deed!</button> <div class="boost-section">
+            <h2>Social Boosts</h2>
+            <button id="adBoostButton">Watch Patriotic Message for 2x SCP (30s)!</button>
             <p id="boostStatus">Boost Inactive</p>
         </div>
 
-        <div class="upgrades-section">
-            <h2>Upgrades</h2>
-            <div id="upgradesContainer">
-                <div class="upgrade-item" id="upgradeStrongerClicks">
-                    <h3>Stronger Clicks</h3>
-                    <p>Increases Gold per Click (GPC).</p>
-                    <p>Current Level: <span id="strongerClicksLevelDisplay">0</span></p>
-                    <p>Current Bonus: +<span id="strongerClicksBonusDisplay">0</span> GPC</p>
-                    <p>Cost: <span id="strongerClicksCostDisplay">10</span> Gold</p>
-                    <button id="buyStrongerClicksButton">Buy</button>
-                </div>
-
-                <div class="upgrade-item" id="upgradeAutoMiner">
-                    <h3>Auto Miner</h3>
-                    <p>Base Gold per Second (GPS).</p>
-                    <p>Current Level: <span id="autoMinerLevelDisplay">0</span></p>
-                    <p>Base Output: <span id="autoMinerOutputDisplay">0</span> GPS</p>
-                    <p>Cost: <span id="autoMinerCostDisplay">25</span> Gold</p>
-                    <button id="buyAutoMinerButton">Buy</button>
-                </div>
-
-                <div class="upgrade-item" id="upgradeClickAmplifier">
-                    <h3>Click Amplifier</h3>
-                    <p>Multiplies your total Gold per Click (GPC).</p>
-                    <p>Current Level: <span id="clickAmplifierLevelDisplay">0</span></p>
-                    <p>Current Multiplier: x<span id="clickAmplifierBonusDisplay">1.0</span></p>
-                    <p>Cost: <span id="clickAmplifierCostDisplay">100</span> Gold</p>
-                    <button id="buyClickAmplifierButton">Buy</button>
-                </div>
-
-                <div class="upgrade-item" id="upgradeAutoMinerEfficiency">
-                    <h3>Miner Efficiency</h3>
-                    <p>Multiplies your total Gold per Second (GPS).</p>
-                    <p>Current Level: <span id="autoMinerEfficiencyLevelDisplay">0</span></p>
-                    <p>Current Multiplier: x<span id="autoMinerEfficiencyBonusDisplay">1.0</span></p>
-                    <p>Cost: <span id="autoMinerEfficiencyCostDisplay">150</span> Gold</p>
-                    <button id="buyAutoMinerEfficiencyButton">Buy</button>
-                </div>
-                </div>
+        <div class="prestige-section">
+            <h2>Influence & Prestige</h2>
+            <p>Current Influence: <span id="influencePointsDisplay">0</span></p>
+            <p>Global SCP Bonus: +<span id="prestigeBonusDisplay">0</span>%</p>
+            <p>Reach <span id="scpForPrestigeDisplay">1,000,000</span> SCP to gain Influence!</p>
+            <button id="prestigeButton" disabled>Prestige for Influence</button>
         </div>
-         <button id="resetButton" class="reset-button">Reset Game Data</button>
+
+        <div class="upgrades-section">
+            <h2>System Enhancements</h2> <div id="upgradesContainer">
+                <div class="upgrade-item" id="upgradePositiveImpact">
+                    <h3>Positive Impact Training</h3>
+                    <p>Increases base SCP per Good Deed.</p>
+                    <p>Level: <span id="positiveImpactLevelDisplay">0</span> | Bonus: +<span id="positiveImpactBonusDisplay">0</span> SCP/Action</p>
+                    <p>Cost: <span id="positiveImpactCostDisplay">10</span> SCP</p>
+                    <button id="buyPositiveImpactButton">Enhance</button>
+                </div>
+
+                <div class="upgrade-item" id="upgradeCommunityProgram">
+                    <h3>Community Contribution Program</h3>
+                    <p>Generates base SCP per second passively.</p>
+                    <p>Level: <span id="communityProgramLevelDisplay">0</span> | Base Output: <span id="communityProgramOutputDisplay">0</span> SCP/s</p>
+                    <p>Cost: <span id="communityProgramCostDisplay">25</span> SCP</p>
+                    <button id="buyCommunityProgramButton">Invest</button>
+                </div>
+
+                <div class="upgrade-item" id="upgradePropagandaNetwork">
+                    <h3>Effective Propaganda Network</h3>
+                    <p>Multiplies your total SCP per Good Deed.</p>
+                    <p>Level: <span id="propagandaNetworkLevelDisplay">0</span> | Multiplier: x<span id="propagandaNetworkBonusDisplay">1.0</span></p>
+                    <p>Cost: <span id="propagandaNetworkCostDisplay">100</span> SCP</p>
+                    <button id="buyPropagandaNetworkButton">Expand</button>
+                </div>
+
+                <div class="upgrade-item" id="upgradeSystemOptimization">
+                    <h3>System Optimization Initiative</h3>
+                    <p>Multiplies your total passive SCP per second.</p>
+                    <p>Level: <span id="systemOptimizationLevelDisplay">0</span> | Multiplier: x<span id="systemOptimizationBonusDisplay">1.0</span></p>
+                    <p>Cost: <span id="systemOptimizationCostDisplay">150</span> SCP</p>
+                    <button id="buySystemOptimizationButton">Optimize</button>
+                </div>
+            </div>
+        </div>
+         <button id="resetButton" class="reset-button">HARD RESET (Lose All Progress)</button>
     </div>
 
     <script src="script.js"></script>
