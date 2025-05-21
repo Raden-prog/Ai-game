@@ -15,13 +15,18 @@
             <p>➕ SCP per Action: <span id="scpPerClickDisplay">1</span></p>
             <p>⏱️ SCP per Second (Passive): <span id="scpPerSecondDisplay">0</span></p>
         </div>
-
-        <div id="clickFeedbackContainer" class="click-feedback-container"></div>
-        <button id="actionButton" class="click-button main-action-button">🙏 Perform Good Deed!</button>
+        
+        <div class="main-action-area">
+            <button id="actionButton" class="main-action-button">
+                <span class="action-button-icon">🙏</span>
+                <span class="action-button-text">Perform Good Deed!</span>
+            </button>
+            <div id="clickFeedbackContainer" class="click-feedback-container"></div>
+        </div>
 
         <div class="boost-section">
             <h2>🚀 Social Boosts</h2>
-            <button id="adBoostButton">📺 Watch Patriotic Message for 2x SCP (30s)!</button>
+            <button id="adBoostButton" class="themed-button boost-button">📺 Watch Patriotic Message for 2x SCP (30s)!</button>
             <p id="boostStatus">Boost Inactive</p>
         </div>
 
@@ -30,7 +35,7 @@
             <p>🌟 Current Influence: <span id="influencePointsDisplay">0</span></p>
             <p>📈 Global SCP Bonus: +<span id="prestigeBonusDisplay">0</span>%</p>
             <p>🎯 Reach <span id="scpForPrestigeDisplay">1,000,000</span> SCP to gain Influence!</p>
-            <button id="prestigeButton" disabled>✨ Prestige for Influence</button>
+            <button id="prestigeButton" class="themed-button prestige-button" disabled>✨ Prestige for Influence</button>
         </div>
 
         <div class="upgrades-section">
@@ -41,7 +46,7 @@
                     <p>Increases base SCP per Good Deed.</p>
                     <p>Lvl: <span id="positiveImpactLevelDisplay">0</span> | Bonus: +<span id="positiveImpactBonusDisplay">0</span> SCP/Action</p>
                     <p>Cost: <span id="positiveImpactCostDisplay">10</span> SCP</p>
-                    <button id="buyPositiveImpactButton">Enhance</button>
+                    <button id="buyPositiveImpactButton" class="themed-button upgrade-buy-button">Enhance</button>
                 </div>
 
                 <div class="upgrade-item" id="upgradeCommunityProgram">
@@ -49,7 +54,7 @@
                     <p>Generates base SCP per second passively.</p>
                     <p>Lvl: <span id="communityProgramLevelDisplay">0</span> | Base Output: <span id="communityProgramOutputDisplay">0</span> SCP/s</p>
                     <p>Cost: <span id="communityProgramCostDisplay">25</span> SCP</p>
-                    <button id="buyCommunityProgramButton">Invest</button>
+                    <button id="buyCommunityProgramButton" class="themed-button upgrade-buy-button">Invest</button>
                 </div>
 
                 <div class="upgrade-item" id="upgradePropagandaNetwork">
@@ -57,7 +62,7 @@
                     <p>Multiplies your total SCP per Good Deed.</p>
                     <p>Lvl: <span id="propagandaNetworkLevelDisplay">0</span> | Multiplier: x<span id="propagandaNetworkBonusDisplay">1.0</span></p>
                     <p>Cost: <span id="propagandaNetworkCostDisplay">100</span> SCP</p>
-                    <button id="buyPropagandaNetworkButton">Expand</button>
+                    <button id="buyPropagandaNetworkButton" class="themed-button upgrade-buy-button">Expand</button>
                 </div>
 
                 <div class="upgrade-item" id="upgradeSystemOptimization">
@@ -65,11 +70,11 @@
                     <p>Multiplies your total passive SCP per second.</p>
                     <p>Lvl: <span id="systemOptimizationLevelDisplay">0</span> | Multiplier: x<span id="systemOptimizationBonusDisplay">1.0</span></p>
                     <p>Cost: <span id="systemOptimizationCostDisplay">150</span> SCP</p>
-                    <button id="buySystemOptimizationButton">Optimize</button>
+                    <button id="buySystemOptimizationButton" class="themed-button upgrade-buy-button">Optimize</button>
                 </div>
             </div>
         </div>
-         <button id="resetButton" class="reset-button">⚠️ HARD RESET (Lose All Progress)</button>
+         <button id="resetButton" class="themed-button reset-button">⚠️ HARD RESET</button>
     </div>
 
     <script src="script.js"></script>
