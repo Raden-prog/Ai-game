@@ -8,64 +8,68 @@
 </head>
 <body>
     <div class="container">
-        <h1>Social Credit Simulator</h1>
+        <h1>🌟 Social Credit Simulator 🌟</h1>
 
-        <div class="scp-display"> <p>Social Credit Points (SCP): <span id="scpCount">0</span></p>
-            <p>SCP per Action: <span id="scpPerClickDisplay">1</span></p>
-            <p>SCP per Second (Passive): <span id="scpPerSecondDisplay">0</span></p>
+        <div class="scp-display">
+            <p>🔴 Social Credit Points (SCP): <span id="scpCount">0</span></p>
+            <p>➕ SCP per Action: <span id="scpPerClickDisplay">1</span></p>
+            <p>⏱️ SCP per Second (Passive): <span id="scpPerSecondDisplay">0</span></p>
         </div>
 
         <div id="clickFeedbackContainer" class="click-feedback-container"></div>
-        <button id="actionButton" class="click-button">Perform Good Deed!</button> <div class="boost-section">
-            <h2>Social Boosts</h2>
-            <button id="adBoostButton">Watch Patriotic Message for 2x SCP (30s)!</button>
+        <button id="actionButton" class="click-button main-action-button">🙏 Perform Good Deed!</button>
+
+        <div class="boost-section">
+            <h2>🚀 Social Boosts</h2>
+            <button id="adBoostButton">📺 Watch Patriotic Message for 2x SCP (30s)!</button>
             <p id="boostStatus">Boost Inactive</p>
         </div>
 
         <div class="prestige-section">
-            <h2>Influence & Prestige</h2>
-            <p>Current Influence: <span id="influencePointsDisplay">0</span></p>
-            <p>Global SCP Bonus: +<span id="prestigeBonusDisplay">0</span>%</p>
-            <p>Reach <span id="scpForPrestigeDisplay">1,000,000</span> SCP to gain Influence!</p>
-            <button id="prestigeButton" disabled>Prestige for Influence</button>
+            <h2>✨ Influence & Prestige</h2>
+            <p>🌟 Current Influence: <span id="influencePointsDisplay">0</span></p>
+            <p>📈 Global SCP Bonus: +<span id="prestigeBonusDisplay">0</span>%</p>
+            <p>🎯 Reach <span id="scpForPrestigeDisplay">1,000,000</span> SCP to gain Influence!</p>
+            <button id="prestigeButton" disabled>✨ Prestige for Influence</button>
         </div>
 
         <div class="upgrades-section">
-            <h2>System Enhancements</h2> <div id="upgradesContainer">
+            <h2>🛠️ System Enhancements</h2>
+            <div id="upgradesContainer">
                 <div class="upgrade-item" id="upgradePositiveImpact">
-                    <h3>Positive Impact Training</h3>
+                    <h3>💪 Positive Impact Training</h3>
                     <p>Increases base SCP per Good Deed.</p>
-                    <p>Level: <span id="positiveImpactLevelDisplay">0</span> | Bonus: +<span id="positiveImpactBonusDisplay">0</span> SCP/Action</p>
+                    <p>Lvl: <span id="positiveImpactLevelDisplay">0</span> | Bonus: +<span id="positiveImpactBonusDisplay">0</span> SCP/Action</p>
                     <p>Cost: <span id="positiveImpactCostDisplay">10</span> SCP</p>
                     <button id="buyPositiveImpactButton">Enhance</button>
                 </div>
 
                 <div class="upgrade-item" id="upgradeCommunityProgram">
-                    <h3>Community Contribution Program</h3>
+                    <h3>👨‍👩‍👧‍👦 Community Contribution Program</h3>
                     <p>Generates base SCP per second passively.</p>
-                    <p>Level: <span id="communityProgramLevelDisplay">0</span> | Base Output: <span id="communityProgramOutputDisplay">0</span> SCP/s</p>
+                    <p>Lvl: <span id="communityProgramLevelDisplay">0</span> | Base Output: <span id="communityProgramOutputDisplay">0</span> SCP/s</p>
                     <p>Cost: <span id="communityProgramCostDisplay">25</span> SCP</p>
                     <button id="buyCommunityProgramButton">Invest</button>
                 </div>
 
                 <div class="upgrade-item" id="upgradePropagandaNetwork">
-                    <h3>Effective Propaganda Network</h3>
+                    <h3>📣 Effective Propaganda Network</h3>
                     <p>Multiplies your total SCP per Good Deed.</p>
-                    <p>Level: <span id="propagandaNetworkLevelDisplay">0</span> | Multiplier: x<span id="propagandaNetworkBonusDisplay">1.0</span></p>
+                    <p>Lvl: <span id="propagandaNetworkLevelDisplay">0</span> | Multiplier: x<span id="propagandaNetworkBonusDisplay">1.0</span></p>
                     <p>Cost: <span id="propagandaNetworkCostDisplay">100</span> SCP</p>
                     <button id="buyPropagandaNetworkButton">Expand</button>
                 </div>
 
                 <div class="upgrade-item" id="upgradeSystemOptimization">
-                    <h3>System Optimization Initiative</h3>
+                    <h3>⚙️ System Optimization Initiative</h3>
                     <p>Multiplies your total passive SCP per second.</p>
-                    <p>Level: <span id="systemOptimizationLevelDisplay">0</span> | Multiplier: x<span id="systemOptimizationBonusDisplay">1.0</span></p>
+                    <p>Lvl: <span id="systemOptimizationLevelDisplay">0</span> | Multiplier: x<span id="systemOptimizationBonusDisplay">1.0</span></p>
                     <p>Cost: <span id="systemOptimizationCostDisplay">150</span> SCP</p>
                     <button id="buySystemOptimizationButton">Optimize</button>
                 </div>
             </div>
         </div>
-         <button id="resetButton" class="reset-button">HARD RESET (Lose All Progress)</button>
+         <button id="resetButton" class="reset-button">⚠️ HARD RESET (Lose All Progress)</button>
     </div>
 
     <script src="script.js"></script>
