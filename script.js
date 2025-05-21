@@ -6,35 +6,35 @@ const SAVE_KEY = 'socialCreditSimSave';
 let positiveImpactLevel = 0;
 const positiveImpactBaseCost = 10;
 const positiveImpactCostIncreaseFactor = 1.15;
-const positiveImpactBonusPerLevel = 1; // Base SCP per action bonus
+const positiveImpactBonusPerLevel = 1; 
 
 // "Community Contribution Program" Upgrade
 let communityProgramLevel = 0;
 const communityProgramBaseCost = 25;
 const communityProgramCostIncreaseFactor = 1.20;
-const communityProgramSCPPerLevel = 1; // Base SCP per second per level
+const communityProgramSCPPerLevel = 1; 
 
 // "Effective Propaganda Network" Upgrade
 let propagandaNetworkLevel = 0;
 const propagandaNetworkBaseCost = 100;
 const propagandaNetworkCostIncreaseFactor = 1.25;
-const propagandaNetworkBonusPerLevel = 0.1; // SCP per action multiplier bonus
+const propagandaNetworkBonusPerLevel = 0.1; 
 
 // "System Optimization Initiative" Upgrade
 let systemOptimizationLevel = 0;
 const systemOptimizationBaseCost = 150;
 const systemOptimizationCostIncreaseFactor = 1.30;
-const systemOptimizationBonusPerLevel = 0.1; // SCP per second multiplier bonus
+const systemOptimizationBonusPerLevel = 0.1; 
 
 // Ad Boost
 let isBoostActive = false;
 let boostEndTime = 0;
-const boostDuration = 30 * 1000; // 30 seconds
+const boostDuration = 30 * 1000;
 const boostMultiplier = 2;
 
 // Prestige System
 let influencePoints = 0;
-const prestigeBonusPerInfluence = 0.01; // Each influence point gives +1% bonus to SCP gain
+const prestigeBonusPerInfluence = 0.01; 
 const baseScpNeededToPrestige = 1000000;
 
 
@@ -42,8 +42,8 @@ const baseScpNeededToPrestige = 1000000;
 const scpCountDisplay = document.getElementById('scpCount');
 const scpPerClickDisplay = document.getElementById('scpPerClickDisplay');
 const scpPerSecondDisplay = document.getElementById('scpPerSecondDisplay');
-const actionButton = document.getElementById('actionButton');
-const clickFeedbackContainer = document.getElementById('clickFeedbackContainer'); // For click feedback
+const actionButton = document.getElementById('actionButton'); 
+const clickFeedbackContainer = document.getElementById('clickFeedbackContainer');
 
 const positiveImpactLevelDisplay = document.getElementById('positiveImpactLevelDisplay');
 const positiveImpactBonusDisplay = document.getElementById('positiveImpactBonusDisplay');
@@ -84,22 +84,26 @@ function calculateTotalPrestigeBonusMultiplier() {
     return 1 + (influencePoints * prestigeBonusPerInfluence);
 }
 
-function getCurrentScpPerAction() {
+function getCurrentScpPerAction() { 
     let baseSCPperAction = 1 + (positiveImpactLevel * positiveImpactBonusPerLevel);
     let actionMultiplier = 1 + (propagandaNetworkLevel * propagandaNetworkBonusPerLevel);
     let scpVal = baseSCPperAction * actionMultiplier;
-    scpVal *= calculateTotalPrestigeBonusMultiplier();
+    
+    scpVal *= calculateTotalPrestigeBonusMultiplier(); 
+
     if (isBoostActive) {
         scpVal *= boostMultiplier;
     }
     return scpVal;
 }
 
-function getCurrentScpPerSecond() {
+function getCurrentScpPerSecond() { 
     let baseSCPperSecond = communityProgramLevel * communityProgramSCPPerLevel;
     let passiveMultiplier = 1 + (systemOptimizationLevel * systemOptimizationBonusPerLevel);
     let scpVal = baseSCPperSecond * passiveMultiplier;
-    scpVal *= calculateTotalPrestigeBonusMultiplier();
+
+    scpVal *= calculateTotalPrestigeBonusMultiplier(); 
+
     if (isBoostActive) {
         scpVal *= boostMultiplier;
     }
@@ -119,8 +123,9 @@ function getSystemOptimizationCost() {
     return Math.ceil(systemOptimizationBaseCost * Math.pow(systemOptimizationCostIncreaseFactor, systemOptimizationLevel));
 }
 
+
 // --- Game Functions ---
-function showScpFeedback(amount) {
+function showScpFeedback(amount) { 
     if (!clickFeedbackContainer) return;
     const feedbackText = document.createElement('div');
     feedbackText.classList.add('click-feedback-text');
@@ -134,12 +139,12 @@ function updateDisplay() {
      if (!scpCountDisplay || !scpPerClickDisplay || !scpPerSecondDisplay || !actionButton || 
         !buyPositiveImpactButton || !buyCommunityProgramButton || !buyPropagandaNetworkButton || !buySystemOptimizationButton ||
         !adBoostButton || !prestigeButton || !resetButton || !influencePointsDisplay || !prestigeBonusDisplay || !scpForPrestigeDisplay ||
-        !clickFeedbackContainer ) {
-        console.error("UI Polish: One or more DOM elements are missing! Check IDs in HTML and JS.");
+        !clickFeedbackContainer ) { 
+        console.error("UI Update: One or more DOM elements are missing! Check IDs in HTML and JS.");
         return;
     }
 
-    scpCountDisplay.textContent = Math.floor(scp).toLocaleString();
+    scpCountDisplay.textContent = Math.floor(scp).toLocaleString(); 
     scpPerClickDisplay.textContent = getCurrentScpPerAction().toFixed(1);
     scpPerSecondDisplay.textContent = getCurrentScpPerSecond().toFixed(1);
 
@@ -177,16 +182,16 @@ function updateDisplay() {
     }
 
     influencePointsDisplay.textContent = influencePoints.toLocaleString();
-    prestigeBonusDisplay.textContent = (influencePoints * prestigeBonusPerInfluence * 100).toFixed(0);
+    prestigeBonusDisplay.textContent = (influencePoints * prestigeBonusPerInfluence * 100).toFixed(0); 
     const scpRequired = getScpNeededToPrestige();
     scpForPrestigeDisplay.textContent = scpRequired.toLocaleString(); 
     prestigeButton.disabled = scp < scpRequired;
 }
 
-function performAction() {
+function performAction() { 
     let scpEarned = getCurrentScpPerAction();
     scp += scpEarned;
-    showScpFeedback(scpEarned); // ADDED: Show click feedback
+    showScpFeedback(scpEarned);
     updateDisplay();
 }
 
@@ -231,8 +236,8 @@ function performPrestige() {
             isBoostActive = false;
             boostEndTime = 0;
             
-            console.log(`Prestiged! Gained ${influenceGained} Influence. Total Influence: ${influencePoints}`); // For debugging
-            saveGame();
+            console.log(`Prestiged! Gained ${influenceGained} Influence. Total Influence: ${influencePoints}`);
+            saveGame(); 
             updateDisplay();
         }
     } else {
@@ -247,10 +252,10 @@ function gameLoop() {
     }
     if (isBoostActive && Date.now() > boostEndTime) {
         isBoostActive = false;
-        updateDisplay();
+        updateDisplay(); 
     }
-    updateDisplay();
-    saveGame();
+    updateDisplay(); 
+    saveGame(); 
 }
 
 function saveGame() {
@@ -261,7 +266,7 @@ function saveGame() {
             communityProgramLevel: communityProgramLevel,
             propagandaNetworkLevel: propagandaNetworkLevel,
             systemOptimizationLevel: systemOptimizationLevel,
-            influencePoints: influencePoints,
+            influencePoints: influencePoints, 
         };
         localStorage.setItem(SAVE_KEY, JSON.stringify(gameState));
     } catch (e) { console.error("Error saving game:", e); }
@@ -277,8 +282,8 @@ function loadGame() {
             communityProgramLevel = parseInt(gameState.communityProgramLevel) || 0;
             propagandaNetworkLevel = parseInt(gameState.propagandaNetworkLevel) || 0;
             systemOptimizationLevel = parseInt(gameState.systemOptimizationLevel) || 0;
-            influencePoints = parseInt(gameState.influencePoints) || 0;
-        } else {
+            influencePoints = parseInt(gameState.influencePoints) || 0; 
+        } else { 
             scp = 0; positiveImpactLevel = 0; communityProgramLevel = 0; propagandaNetworkLevel = 0; systemOptimizationLevel = 0; influencePoints = 0;
         }
     } catch (e) {
@@ -287,7 +292,7 @@ function loadGame() {
     }
 }
 
-function resetGameData() {
+function resetGameData() { 
     if (confirm("Are you sure you want to HARD RESET all game data? This includes Influence and cannot be undone!")) {
         try {
             localStorage.removeItem(SAVE_KEY);
@@ -296,11 +301,11 @@ function resetGameData() {
             communityProgramLevel = 0;
             propagandaNetworkLevel = 0;
             systemOptimizationLevel = 0;
-            influencePoints = 0;
+            influencePoints = 0; 
             isBoostActive = false;
             boostEndTime = 0;
             updateDisplay();
-            console.log("Game data has been HARD RESET."); // For debugging
+            console.log("Game data has been HARD RESET.");
         } catch (e) { console.error("Error resetting game data:", e); }
     }
 }
@@ -316,8 +321,8 @@ if (prestigeButton) prestigeButton.addEventListener('click', performPrestige);
 if (resetButton) resetButton.addEventListener('click', resetGameData);
 
 // --- Initial Game Setup ---
-// console.log("Initializing Social Credit Simulator with UI Polish..."); // For debugging
+// console.log("Initializing Social Credit Simulator with main action button style...");
 loadGame();
 updateDisplay();
 setInterval(gameLoop, 100);
-// console.log("Social Credit Simulator Initialized with UI Polish."); // For debugging
+// console.log("Social Credit Simulator Initialized with main action button style.");
