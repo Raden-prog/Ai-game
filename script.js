@@ -40,9 +40,9 @@ const baseScpNeededToPrestige = 1000000;
 // Music Player Variables
 const playlist = [
     // IMPORTANT: Replace these with YOUR actual, working, royalty-free MP3 URLs!
-    { name: "Placeholder Track 1 (Replace Me!)", url: "https://music.youtube.com/watch?v=W8x4m-qpmJ8&si=LTPqBrC0xnpZWIy2" },
-    { name: "Placeholder Track 2 (Replace Me!)", url: "https://eta.123tokyo.xyz/get.php/4/bd/VKq2flvS7dw.mp3?n=%E8%B2%BB%E7%8E%89%E6%B8%85%20-%20%E4%B8%80%E7%BF%A6%E6%A2%85%20Yu-Ching%20Fei-%20Yi%20Jian%20Mei%20%28xue%20hua%20piao%20piao%20bei%20feng%20xiao%20xiao%29%5BOfficial%20Lyric%20Video%5D&uT=R&uN=ZHVieWE%3D&h=X5gkvTdVTQYQVcsV1bmGdg&s=1747828868&uT=R&uN=ZHVieWE%3D" },
-    { name: "Placeholder Track 3 (Replace Me!)", url: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-3.mp3" }
+    { name: "Lugowo", url: "https://alpha.123tokyo.xyz/get.php/7/aa/0Kh96n67wgk.mp3?n=%E4%BD%A0%E6%98%AF%E6%88%91%E5%94%AF%E4%B8%80%E7%9A%84%E6%89%A7%E7%9D%80&uT=R&uN=ZHVieWE%3D&h=5Bvlk1-KHf_7EtT8EBKx-Q&s=1747834534&uT=R&uN=ZHVieWE%3D" },
+    { name: "Yi Jian Mei", url: "https://eta.123tokyo.xyz/get.php/4/bd/VKq2flvS7dw.mp3?n=%E8%B2%BB%E7%8E%89%E6%B8%85%20-%20%E4%B8%80%E7%BF%A6%E6%A2%85%20Yu-Ching%20Fei-%20Yi%20Jian%20Mei%20%28xue%20hua%20piao%20piao%20bei%20feng%20xiao%20xiao%29%5BOfficial%20Lyric%20Video%5D&uT=R&uN=ZHVieWE%3D&h=X5gkvTdVTQYQVcsV1bmGdg&s=1747828868&uT=R&uN=ZHVieWE%3D" },
+    { name: "Jin Sheng Yuan", url: "https://alpha.123tokyo.xyz/get.php/9/28/0xjJuAzZj0s.mp3?n=Wang%20San%20%28%E7%8E%8B%E4%B8%89%29%20-%20Jin%20Sheng%20Yuan%20%28%E4%BB%8A%E7%94%9F%E7%BC%98%29%20Lyrics%20%E6%AD%8C%E8%AF%8D%20Pinyin_English%20Translation%20%28%E5%8B%95%E6%85%8B%E6%AD%8C%E8%A9%9E%29&uT=R&uN=ZHVieWE%3D&h=5zbbMRJgj6Sg6C1EbVPrTg&s=1747834412&uT=R&uN=ZHVieWE%3D" }
 ];
 let currentTrackIndex = 0;
 let isMusicPlaying = false; 
