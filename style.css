@@ -8,6 +8,10 @@ body {
     margin: 20px 0;
     background-color: #f0f0f0;
     color: #333;
+    -webkit-user-select: none; /* Disable text selection on mobile for better click feel */
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
 }
 
 .container {
@@ -16,42 +20,46 @@ body {
     padding: 20px;
     border-radius: 8px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    max-width: 550px; /* Slightly wider for new info */
+    max-width: 550px;
     width: 90%;
 }
 
-.scp-display p { /* Was .gold-display */
+h1 {
+    color: #c0392b; /* Thematic red */
+}
+
+.scp-display p {
     margin: 8px 0;
     font-size: 1.2em;
 }
 
-#scpCount { /* Was #goldCount */
+#scpCount {
     font-weight: bold;
-    color: #c0392b; /* Changed to a more "social credit" red */
+    color: #c0392b;
 }
 
 .click-feedback-container {
     position: relative;
-    height: 30px;
-    margin-bottom: -15px;
+    height: 40px; /* Increased height for feedback */
+    margin-bottom: -10px; /* Adjust to pull button closer */
     pointer-events: none;
 }
 
 .click-feedback-text {
     position: absolute;
     left: 50%;
-    bottom: 5px;
+    bottom: 0px; /* Start slightly lower if container is taller */
     transform: translateX(-50%);
     animation: floatUpAndFade 1s ease-out forwards;
-    background-color: rgba(231, 76, 60, 0.75); /* Reddish theme */
-    padding: 3px 8px;
-    border-radius: 10px;
-    font-size: 1em;
+    background-color: rgba(231, 76, 60, 0.85); /* Reddish theme */
+    padding: 5px 10px; /* Slightly larger feedback */
+    border-radius: 12px;
+    font-size: 1.1em; /* Larger feedback text */
     font-weight: bold;
-    color: #fff; /* White text for contrast */
+    color: #fff;
     pointer-events: none;
     white-space: nowrap;
-    box-shadow: 0px 0px 5px rgba(0,0,0,0.2);
+    box-shadow: 0px 2px 6px rgba(0,0,0,0.25);
 }
 
 @keyframes floatUpAndFade {
@@ -61,52 +69,71 @@ body {
     }
     100% {
         opacity: 0;
-        transform: translate(-50%, -50px);
+        transform: translate(-50%, -60px); /* Float up further */
     }
 }
 
-.click-button, /* Main action button */
-.reset-button {
+.click-button.main-action-button { /* Specific style for the main action button */
+    padding: 25px 40px; /* Significantly larger padding */
+    font-size: 1.5em;   /* Larger font size */
+    min-width: 300px;   /* Minimum width */
+    margin-top: 10px;   /* Adjusted margin */
+    margin-bottom: 25px;
+    background-color: #27ae60; 
     color: white;
     border: none;
-    padding: 15px 30px;
-    font-size: 1.2em;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.2s ease, transform 0.1s ease;
+    -webkit-tap-highlight-color: transparent; /* Remove blue tap highlight on mobile */
+}
+
+.click-button.main-action-button:hover {
+    background-color: #229954;
+}
+
+.click-button.main-action-button:active {
+    transform: scale(0.96); /* Slightly more pronounced active scale */
+}
+
+
+.reset-button { /* Standard button style */
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    font-size: 1em;
     border-radius: 5px;
     cursor: pointer;
-    margin-top: 20px;
+    margin-top: 30px;
     margin-bottom: 20px;
     transition: background-color 0.3s ease, transform 0.1s ease;
+    background-color: #c0392b;
+    -webkit-tap-highlight-color: transparent;
 }
-
-.click-button { /* Main action button */
-    background-color: #27ae60; /* Green for positive action */
+.reset-button:hover {
+    background-color: #a93226;
 }
-
-.click-button:hover {
-    background-color: #229954; /* Darker green */
-}
-
-.click-button:active,
 .reset-button:active {
     transform: scale(0.98);
 }
 
+
 .boost-section {
     margin-top: 20px;
-    margin-bottom: 20px;
+    margin-bottom: 25px;
     padding: 15px;
-    background-color: #e8f6f3; /* Light green */
+    background-color: #e8f6f3;
     border-radius: 5px;
     border: 1px solid #a3e4d7;
 }
 
 .boost-section h2 {
     margin-top: 0;
-    color: #196f3d; /* Dark green */
+    color: #196f3d;
 }
 
 .boost-section button {
-    background-color: #1abc9c; /* Teal */
+    background-color: #1abc9c;
     color: white;
     border: none;
     padding: 10px 15px;
@@ -114,6 +141,7 @@ body {
     border-radius: 4px;
     cursor: pointer;
     transition: background-color 0.3s ease;
+    -webkit-tap-highlight-color: transparent;
 }
 
 .boost-section button:hover {
@@ -134,14 +162,14 @@ body {
 .prestige-section {
     margin-top: 25px;
     padding: 15px;
-    background-color: #fdf2e9; /* Light orange/beige */
+    background-color: #fdf2e9;
     border-radius: 5px;
     border: 1px solid #f5cba7;
 }
 
 .prestige-section h2 {
     margin-top: 0;
-    color: #b9770e; /* Dark yellow/brown */
+    color: #b9770e;
 }
 
 .prestige-section p {
@@ -154,7 +182,7 @@ body {
 }
 
 .prestige-section button {
-    background-color: #d35400; /* Strong orange */
+    background-color: #d35400;
     color: white;
     padding: 10px 20px;
     font-size: 1em;
@@ -163,14 +191,15 @@ body {
     cursor: pointer;
     margin-top: 10px;
     transition: background-color 0.3s ease;
+    -webkit-tap-highlight-color: transparent;
 }
 
 .prestige-section button:hover {
-    background-color: #a04000; /* Darker orange */
+    background-color: #a04000;
 }
 
 .prestige-section button:disabled {
-    background-color: #f5b041; /* Lighter orange, less prominent */
+    background-color: #f5b041;
     cursor: not-allowed;
 }
 
@@ -182,7 +211,7 @@ body {
 }
 
 #upgradesContainer {
-    max-height: 280px; /* Adjusted for more content */
+    max-height: 280px;
     overflow-y: auto;
     padding-right: 5px;
     margin-right: -5px;
@@ -204,6 +233,7 @@ body {
     margin-top: 0;
     margin-bottom: 5px;
     color: #2c3e50;
+    font-size: 1.1em; /* Slightly larger upgrade titles */
 }
 
 .upgrade-item p {
@@ -213,7 +243,7 @@ body {
 }
 
 .upgrade-item button {
-    background-color: #5dade2; /* Lighter blue for general upgrades */
+    background-color: #5dade2;
     color: white;
     border: none;
     padding: 8px 12px;
@@ -223,23 +253,14 @@ body {
     margin-top: 8px;
     transition: background-color 0.3s ease;
     align-self: flex-start;
+    -webkit-tap-highlight-color: transparent;
 }
 
 .upgrade-item button:hover {
-    background-color: #3498db; /* Standard blue */
+    background-color: #3498db;
 }
 
 .upgrade-item button:disabled {
-    background-color: #aed6f1; /* Lighter disabled blue */
+    background-color: #aed6f1;
     cursor: not-allowed;
 }
-
-.reset-button {
-    background-color: #c0392b; /* Darker red */
-    margin-top: 30px;
-    padding: 10px 20px;
-    font-size: 1em;
-}
-.reset-button:hover {
-    background-color: #a93226; /* Even darker red */
-                                 }
