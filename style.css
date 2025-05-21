@@ -16,21 +16,56 @@ body {
     padding: 20px;
     border-radius: 8px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    max-width: 500px;
+    max-width: 550px; /* Slightly wider for new info */
     width: 90%;
 }
 
-.gold-display p {
+.scp-display p { /* Was .gold-display */
     margin: 8px 0;
     font-size: 1.2em;
 }
 
-#goldCount {
+#scpCount { /* Was #goldCount */
     font-weight: bold;
-    color: #e67e22;
+    color: #c0392b; /* Changed to a more "social credit" red */
 }
 
-.click-button,
+.click-feedback-container {
+    position: relative;
+    height: 30px;
+    margin-bottom: -15px;
+    pointer-events: none;
+}
+
+.click-feedback-text {
+    position: absolute;
+    left: 50%;
+    bottom: 5px;
+    transform: translateX(-50%);
+    animation: floatUpAndFade 1s ease-out forwards;
+    background-color: rgba(231, 76, 60, 0.75); /* Reddish theme */
+    padding: 3px 8px;
+    border-radius: 10px;
+    font-size: 1em;
+    font-weight: bold;
+    color: #fff; /* White text for contrast */
+    pointer-events: none;
+    white-space: nowrap;
+    box-shadow: 0px 0px 5px rgba(0,0,0,0.2);
+}
+
+@keyframes floatUpAndFade {
+    0% {
+        opacity: 1;
+        transform: translate(-50%, 0px);
+    }
+    100% {
+        opacity: 0;
+        transform: translate(-50%, -50px);
+    }
+}
+
+.click-button, /* Main action button */
 .reset-button {
     color: white;
     border: none;
@@ -43,12 +78,12 @@ body {
     transition: background-color 0.3s ease, transform 0.1s ease;
 }
 
-.click-button {
-    background-color: #3498db;
+.click-button { /* Main action button */
+    background-color: #27ae60; /* Green for positive action */
 }
 
 .click-button:hover {
-    background-color: #2980b9;
+    background-color: #229954; /* Darker green */
 }
 
 .click-button:active,
@@ -60,18 +95,18 @@ body {
     margin-top: 20px;
     margin-bottom: 20px;
     padding: 15px;
-    background-color: #e9f5ff;
+    background-color: #e8f6f3; /* Light green */
     border-radius: 5px;
-    border: 1px solid #aed6f1;
+    border: 1px solid #a3e4d7;
 }
 
 .boost-section h2 {
     margin-top: 0;
-    color: #1f618d;
+    color: #196f3d; /* Dark green */
 }
 
 .boost-section button {
-    background-color: #f39c12;
+    background-color: #1abc9c; /* Teal */
     color: white;
     border: none;
     padding: 10px 15px;
@@ -82,19 +117,61 @@ body {
 }
 
 .boost-section button:hover {
-    background-color: #d35400;
+    background-color: #16a085;
 }
 
 .boost-section button:disabled {
-    background-color: #fAD7A0;
+    background-color: #a2d9ce;
     cursor: not-allowed;
 }
-
 
 #boostStatus {
     font-style: italic;
     color: #555;
     margin-top: 10px;
+}
+
+.prestige-section {
+    margin-top: 25px;
+    padding: 15px;
+    background-color: #fdf2e9; /* Light orange/beige */
+    border-radius: 5px;
+    border: 1px solid #f5cba7;
+}
+
+.prestige-section h2 {
+    margin-top: 0;
+    color: #b9770e; /* Dark yellow/brown */
+}
+
+.prestige-section p {
+    margin: 8px 0;
+    font-size: 1em;
+}
+
+#influencePointsDisplay, #prestigeBonusDisplay {
+    font-weight: bold;
+}
+
+.prestige-section button {
+    background-color: #d35400; /* Strong orange */
+    color: white;
+    padding: 10px 20px;
+    font-size: 1em;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-top: 10px;
+    transition: background-color 0.3s ease;
+}
+
+.prestige-section button:hover {
+    background-color: #a04000; /* Darker orange */
+}
+
+.prestige-section button:disabled {
+    background-color: #f5b041; /* Lighter orange, less prominent */
+    cursor: not-allowed;
 }
 
 
@@ -105,7 +182,7 @@ body {
 }
 
 #upgradesContainer {
-    max-height: 300px;
+    max-height: 280px; /* Adjusted for more content */
     overflow-y: auto;
     padding-right: 5px;
     margin-right: -5px;
@@ -114,50 +191,55 @@ body {
 .upgrade-item {
     background-color: #ecf0f1;
     border: 1px solid #bdc3c7;
-    padding: 15px;
-    margin-bottom: 15px;
+    padding: 12px;
+    margin-bottom: 12px;
     border-radius: 5px;
     text-align: left;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
 }
 
 .upgrade-item h3 {
     margin-top: 0;
-    margin-bottom: 8px;
+    margin-bottom: 5px;
     color: #2c3e50;
 }
 
 .upgrade-item p {
-    margin: 5px 0;
-    font-size: 0.95em;
+    margin: 0;
+    font-size: 0.9em;
+    line-height: 1.4;
 }
 
 .upgrade-item button {
-    background-color: #2ecc71;
+    background-color: #5dade2; /* Lighter blue for general upgrades */
     color: white;
     border: none;
-    padding: 8px 15px;
+    padding: 8px 12px;
     font-size: 0.9em;
     border-radius: 4px;
     cursor: pointer;
     margin-top: 8px;
     transition: background-color 0.3s ease;
+    align-self: flex-start;
 }
 
 .upgrade-item button:hover {
-    background-color: #27ae60;
+    background-color: #3498db; /* Standard blue */
 }
 
 .upgrade-item button:disabled {
-    background-color: #95a5a6;
+    background-color: #aed6f1; /* Lighter disabled blue */
     cursor: not-allowed;
 }
 
 .reset-button {
-    background-color: #e74c3c;
+    background-color: #c0392b; /* Darker red */
     margin-top: 30px;
     padding: 10px 20px;
     font-size: 1em;
 }
 .reset-button:hover {
-    background-color: #c0392b;
-}
+    background-color: #a93226; /* Even darker red */
+                                 }
